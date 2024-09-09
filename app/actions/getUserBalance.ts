@@ -15,9 +15,11 @@ async function getUserBalance(): Promise<{
         userId: userId, // cleck user id.
       },
     });
-    const balance = transactions.reduce((acc, current) => {
-      return acc + current.amount; // devuelve la suma acumulada (no un objeto)
-    }, 0);
+    const balance = +transactions
+      .reduce((acc, current) => {
+        return acc + current.amount; // devuelve la suma acumulada (no un objeto)
+      }, 0)
+      .toFixed(2); // redondea a dos decimales
     return { balance };
   } catch (error) {
     console.error('Error getting balance:', error);
